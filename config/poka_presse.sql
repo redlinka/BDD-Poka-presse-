@@ -111,4 +111,3 @@ CREATE TABLE apparition(
    FOREIGN KEY(num_image) REFERENCES Image(num_image),
    FOREIGN KEY(num_vers) REFERENCES Maquette(num_vers)
 );
-
