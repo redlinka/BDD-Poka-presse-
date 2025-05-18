@@ -21,10 +21,10 @@ if (session_status() === PHP_SESSION_NONE) {
                     <li><a href="articles.php">Articles</a></li>
                     <li><a href="stats.php">Stats</a></li>
                 <?php endif;?>
-                    <li><a href="numeros.php">Numeros</a></li>
+                    <li><a href="tableau_de_bord.php">Tableau de bord</a></li>
                     <li><a href="rubriques.php">Rubriques</a></li>
-                    <li><a href="index.php">Deconnexion</a></li>
-                    <li><a href="profile.php">Profile</a></li>
+                    <li><a href="connexion.php">Deconnexion</a></li>
+                    <li><a href="profile.php?id=<?php echo $_SESSION['id']; ?>">Profile</a></li>
             </ul>
         </nav>
     </header>
