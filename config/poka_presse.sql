@@ -54,7 +54,7 @@ CREATE TABLE Pays(
 CREATE TABLE Maquette(
    num_vers SERIAL,
    date_creation DATE,
-   lien_maquette VARCHAR(50)
+   lien_maquette VARCHAR(50),
    mat_maquettiste INT,
    PRIMARY KEY(num_vers),
    FOREIGN KEY(mat_maquettiste) REFERENCES Acteur(matricule)
