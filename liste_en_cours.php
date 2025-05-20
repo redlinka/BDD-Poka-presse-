@@ -9,7 +9,6 @@ if (count($numeros) > 0) {
         // On passe le code de la ligne dans l'URL
         $link = "numero.php?code=" . urlencode($row['code']);
         echo "<a href='" . htmlspecialchars($link) . "'>" . htmlspecialchars($row['code']) . "</a></br>";
-        echo "</tr>";
     }
 } else {
     echo "<p>Aucun numero en cours</p>";
