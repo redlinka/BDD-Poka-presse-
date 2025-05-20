@@ -1,3 +1,22 @@
+/**
+ * Affiche le profil d'un acteur à partir de son matricule passé en paramètre GET.
+ *
+ * - Récupère le matricule depuis l'URL (?matricule=).
+ * - Si le matricule est absent, retourne une erreur 400.
+ * - Recherche l'acteur correspondant dans la base de données.
+ * - Affiche les informations de l'acteur (nom, prénom, fonction, statut, mail).
+ * - Affiche un message si aucun acteur n'est trouvé.
+ *
+ * Dépendances :
+ * - Requiert le fichier 'includes/cnx.php' pour la connexion à la base de données.
+ * - Utilise PDO pour les requêtes SQL.
+ *
+ * Sécurité :
+ * - Utilise htmlspecialchars pour éviter les failles XSS lors de l'affichage.
+ *
+ * Paramètres GET :
+ * - matricule (int) : Identifiant unique de l'acteur à afficher.
+ */
 <?php
 
 include 'includes/cnx.php';

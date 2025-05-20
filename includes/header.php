@@ -1,3 +1,20 @@
+/**
+ * Fichier d'en-tête pour l'application Poka Presse.
+ *
+ * - Démarre une session si aucune n'est active.
+ * - Génère l'en-tête HTML, incluant les balises meta et la feuille de style.
+ * - Affiche un menu de navigation avec des liens selon le rôle de l'utilisateur :
+ *   - Si la variable de session 'fonction' est 'AD' (Admin) ou 'CR' (Contributeur),
+ *     des liens supplémentaires vers "Acteurs", "Articles" et "Stats" sont affichés.
+ *   - Tous les utilisateurs voient les liens vers "Tableau de bord", "Rubriques", "Déconnexion" et leur profil.
+ *   - Le lien du profil inclut dynamiquement l'identifiant de session 'id'.
+ *
+ * Hypothèses :
+ * - Les variables de session 'fonction' et 'id' sont définies lors de l'authentification.
+ * - Le fichier CSS 'css/stylesheet.css' existe et est accessible.
+ *
+ * @package PokaPresse
+ */
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

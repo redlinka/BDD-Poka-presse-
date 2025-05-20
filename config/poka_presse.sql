@@ -112,6 +112,8 @@ CREATE TABLE apparition(
    FOREIGN KEY(num_vers) REFERENCES Maquette(num_vers)
 );
 
+-----------------------JEU DE DONNEES----------------------
+
 -- Acteur
 INSERT INTO Acteur (nom, prenom, mail, salarie, fonction, pass) VALUES
 ('Martin', 'Claire', 'claire.martin@example.com', FALSE, 'PG', 'pass456'),

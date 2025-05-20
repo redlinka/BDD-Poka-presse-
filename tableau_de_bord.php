@@ -1,3 +1,19 @@
+/**
+ * Tableau de bord principal pour les utilisateurs connectés.
+ *
+ * - Vérifie si l'utilisateur est connecté, sinon redirige vers la page de connexion.
+ * - Récupère et affiche le prénom de l'utilisateur connecté.
+ * - Affiche deux sections principales :
+ *   - Liste des numéros en cours (via un iframe vers liste_en_cours.php)
+ *   - Liste des numéros publiés (via un iframe vers liste_publie.php)
+ * - Ajoute un script JavaScript pour intercepter les clics sur les liens à l'intérieur des iframes
+ *   et rediriger la page principale vers l'URL du lien cliqué.
+ *
+ * Dépendances :
+ * - Connexion à la base de données via 'includes/cnx.php'
+ * - En-tête et pied de page via 'includes/header.php' et 'includes/footer.php'
+ * - Variables de session : 'login' et 'id'
+ */
 <?php
 
 include 'includes/cnx.php';

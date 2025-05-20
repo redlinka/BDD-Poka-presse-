@@ -1,3 +1,26 @@
+/**
+ * Page de connexion pour l'application Poka Presse.
+ *
+ * Fonctionnalités principales :
+ * - Affiche un formulaire de connexion demandant le login (nom d'utilisateur ou email) et le mot de passe.
+ * - À la soumission du formulaire (méthode POST), vérifie que les champs sont remplis.
+ * - Récupère les informations de connexion de l'utilisateur et hashe le mot de passe avec md5.
+ * - Inclut le fichier de connexion à la base de données (`includes/cnx.php`).
+ * - Prépare et exécute une requête SQL pour vérifier si un utilisateur existe avec le login et le mot de passe fournis.
+ * - Si l'utilisateur est trouvé, initialise la session avec les informations de l'utilisateur et redirige vers `tableau_de_bord.php`.
+ * - Si les identifiants sont incorrects, affiche un message d'erreur.
+ * - Si le formulaire n'est pas soumis, déconnecte l'utilisateur en supprimant les variables de session.
+ *
+ * Sécurité :
+ * - Utilisation de requêtes préparées pour éviter les injections SQL.
+ * - Le mot de passe est stocké et comparé sous forme de hash md5 (à améliorer pour une meilleure sécurité).
+ *
+ * Dépendances :
+ * - Fichier de connexion à la base de données : `includes/cnx.php`
+ * - Feuille de style : `css/stylesheet.css`
+ *
+ * @package PokaPresse
+ */
 
 <!DOCTYPE html>
 <html lang="fr">

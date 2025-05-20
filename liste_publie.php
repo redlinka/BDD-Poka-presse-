@@ -1,3 +1,14 @@
+/**
+ * This script retrieves and displays all published "numero" records from the database.
+ * 
+ * - Connects to the database using the included 'includes/cnx.php' file.
+ * - Executes a query to select all rows from the 'numero' table where both 'date_publication' and 'num_vers' are not null.
+ * - For each result, generates a hyperlink to 'numero.php' with the 'code' as a URL parameter.
+ * - If no records are found, displays a message indicating that there are no finished numbers.
+ *
+ * @package PokaPresse
+ * @file liste_publie.php
+ */
 <?php
 include 'includes/cnx.php';
 

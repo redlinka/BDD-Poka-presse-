@@ -1,3 +1,33 @@
+/**
+ * Page : acteurs.php
+ *
+ * Description :
+ * --------------
+ * Cette page affiche la liste des "Membres de Poka Presse".
+ * Elle inclut un contrôle d'accès basé sur la session, autorisant uniquement les utilisateurs ayant le rôle 'AD' (Admin)
+ * ou 'CR' (Correspondant) à accéder à la page. Les utilisateurs non autorisés reçoivent une réponse 403 et un message d'erreur.
+ *
+ * Fonctionnalités :
+ * -----------------
+ * - Inclut la connexion à la base de données et les templates d'en-tête/pied de page.
+ * - Intègre deux iframes :
+ *     1. L'iframe "acteurs" charge 'liste_acteurs.php', qui liste les membres.
+ *     2. L'iframe "details" affiche les détails d'un membre sélectionné.
+ * - Utilise JavaScript pour intercepter les clics sur les liens dans l'iframe "acteurs",
+ *   empêchant la navigation par défaut et chargeant le contenu lié dans l'iframe "details".
+ *
+ * Sécurité :
+ * ----------
+ * - L'accès est restreint aux utilisateurs connectés avec des rôles spécifiques.
+ * - Un accès non autorisé retourne un HTTP 403 et un message convivial.
+ *
+ * Dépendances :
+ * -------------
+ * - includes/cnx.php : Connexion à la base de données.
+ * - includes/header.php : En-tête de la page.
+ * - includes/footer.php : Pied de page.
+ * - liste_acteurs.php : Liste des membres à afficher dans l'iframe.
+ */
 <?php
 
 include 'includes/cnx.php';
