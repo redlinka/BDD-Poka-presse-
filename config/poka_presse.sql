@@ -12,7 +12,6 @@ CREATE TABLE Acteur(
 CREATE TABLE Rubrique(
    num_rubrique SERIAL,
    nom_rubrique VARCHAR(50),
-   num_rubrique_ancetre SMALLINT,
    num_rubrique_ancetre INT,
    PRIMARY KEY(num_rubrique),
    FOREIGN KEY(num_rubrique_ancetre) REFERENCES Rubrique(num_rubrique)
@@ -26,7 +25,6 @@ CREATE TABLE Article(
    date_acceptation DATE,
    publie BOOLEAN NOT NULL,
    nb_feuillets INT,
-   num_rubrique SMALLINT NOT NULL,
    num_rubrique INT NOT NULL,
    PRIMARY KEY(num_article),
    FOREIGN KEY(num_rubrique) REFERENCES Rubrique(num_rubrique)
@@ -41,7 +39,6 @@ CREATE TABLE Image(
 
 CREATE TABLE Pigiste(
    mat_pigiste SERIAL,
-   mat_pigiste INT,
    notoriete DECIMAL(10, 2),
    PRIMARY KEY(mat_pigiste),
    FOREIGN KEY(mat_pigiste) REFERENCES Acteur(matricule)
@@ -54,27 +51,18 @@ CREATE TABLE Pays(
    PRIMARY KEY(code_pays)
 );
 
-CREATE TABLE Maquettiste(
-   mat_maquettiste SERIAL,
-   PRIMARY KEY(mat_maquettiste),
-   FOREIGN KEY(mat_maquettiste) REFERENCES Acteur(matricule)
-);
-
 CREATE TABLE Maquette(
    num_vers SERIAL,
    date_creation DATE,
-   lien_maquette VARCHAR(50),
-   mat_maquettiste SERIAL NOT NULL,
+   lien_maquette VARCHAR(50)
    mat_maquettiste INT,
    PRIMARY KEY(num_vers),
-   FOREIGN KEY(mat_maquettiste) REFERENCES Maquettiste(mat_maquettiste)
    FOREIGN KEY(mat_maquettiste) REFERENCES Acteur(matricule)
 );
 
 CREATE TABLE Numero(
    code VARCHAR(50),
    date_publication DATE,
-   num_vers SERIAL,
    num_vers INT,
    PRIMARY KEY(code),
    FOREIGN KEY(num_vers) REFERENCES Maquette(num_vers)
@@ -94,7 +82,6 @@ CREATE TABLE distribution(
 
 CREATE TABLE contient(
    num_rubrique SERIAL,
-   num_rubrique INT,
    code VARCHAR(50),
    PRIMARY KEY(num_rubrique, code),
    FOREIGN KEY(num_rubrique) REFERENCES Rubrique(num_rubrique),
@@ -102,8 +89,6 @@ CREATE TABLE contient(
 );
 
 CREATE TABLE ecriture(
-   num_article SERIAL,
-   mat_pigiste SERIAL,
    num_article INT,
    mat_pigiste INT,
    PRIMARY KEY(num_article, mat_pigiste),
@@ -112,8 +97,6 @@ CREATE TABLE ecriture(
 );
 
 CREATE TABLE liaison(
-   num_article SERIAL,
-   num_image SERIAL,
    num_article INT,
    num_image INT,
    PRIMARY KEY(num_article, num_image),
@@ -122,8 +105,6 @@ CREATE TABLE liaison(
 );
 
 CREATE TABLE apparition(
-   num_image SERIAL,
-   num_vers SERIAL,
    num_image INT,
    num_vers INT,
    PRIMARY KEY(num_image, num_vers),
