@@ -26,9 +26,9 @@ if ($acteur) {
     }
     echo "<p>matricule : " . htmlspecialchars($mat) . "</p>";
     if ($acteur['salarie'] != 0) {
-        echo "<p>Salarie : Oui </p>";
+        echo "<p>Statut : Salarie </p>";
     } else {
-        echo "<p>Salarie : Non</p>";
+        echo "<p>Statut : travailleur independant</p>";
     }
     echo "<p>Mail : " . htmlspecialchars($acteur['mail']) . "</p>";
 } else {
