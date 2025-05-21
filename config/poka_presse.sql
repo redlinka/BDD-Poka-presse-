@@ -1,5 +1,3 @@
-SET search_path TO 'pop';
-
 CREATE TABLE Acteur(
    matricule SERIAL,
    nom VARCHAR(50),
@@ -49,7 +47,6 @@ CREATE TABLE Pigiste(
 CREATE TABLE Region(
    code_pays VARCHAR(50),
    nom_pays VARCHAR(50),
-   statistiques_vente VARCHAR(50),
    PRIMARY KEY(code_pays)
 );
 
