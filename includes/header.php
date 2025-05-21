@@ -41,7 +41,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <li><a href="tableau_de_bord.php">Tableau de bord</a></li>
                     <li><a href="rubriques.php">Rubriques</a></li>
                     <li><a href="connexion.php">Deconnexion</a></li>
-                    <li><a href="profile.php?id=<?php echo $_SESSION['id']; ?>">Profile</a></li>
+                    <li><a href="profile.php?matricule=<?php echo $_SESSION['id']; ?>">Profile</a></li>
             </ul>
         </nav>
     </header>
