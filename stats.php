@@ -1,19 +1,3 @@
-/**
- * Affiche diverses statistiques sur les pigistes et les articles.
- *
- * - Vérifie si l'utilisateur est connecté et possède les droits d'accès ('AD' ou 'CR').
- * - Affiche le top 3 des pigistes ayant écrit le plus d'articles.
- * - Affiche le nombre total d'articles publiés.
- * - Affiche le nombre total de pigistes actifs (ayant écrit au moins un article).
- * - Affiche le nombre d'articles publiés ce mois-ci.
- *
- * Dépendances :
- * - Connexion à la base de données via 'includes/cnx.php'.
- * - En-tête et pied de page via 'includes/header.php' et 'includes/footer.php'.
- *
- * Sécurité :
- * - Utilise htmlspecialchars pour échapper les valeurs affichées.
- */
 
 <?php
 // Include database connection
@@ -42,20 +26,46 @@ JOIN (
 ) e ON a.matricule = e.mat_pigiste
 ORDER BY e.article_count DESC
 ";
+$sql2 = "
+SELECT p.nom_pays, SUM(d.nb_ventes) AS total_ventes
+FROM pays p
+JOIN distribution d ON p.code_pays = d.code_pays
+GROUP BY p.code_pays, p.nom_pays
+ORDER BY total_ventes DESC
+LIMIT 3";
 
 $stmt = $cnx->query($sql);
-$top = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$topPig = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo "<h2>Top 3 Pigistes par Nombre d'Articles</h2>";
 echo "<table border='1' cellpadding='5' cellspacing='0'>";
 echo "<tr><th>Nom</th><th>Prénom</th><th>Nombre d'articles</th></tr>";
 
-if (count($top) > 0) {
-    foreach ($top as $row) {
+if (count($topPig) > 0) {
+    foreach ($topPig as $row) {
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['nom']) . "</td>";
         echo "<td>" . htmlspecialchars($row['prenom']) . "</td>";
         echo "<td>" . htmlspecialchars($row['article_count']) . "</td>";
+        echo "</tr>";
+    }
+} else {
+    echo "<tr><td colspan='3'>Aucun résultat</td></tr>";
+}
+echo "</table>";
+
+$stmt = $cnx->query($sql2);
+$topPays = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+echo "<h2>Top 3 des pays avec le plus de ventes</h2>";
+echo "<table border='1' cellpadding='5' cellspacing='0'>";
+echo "<tr><th>Nom du pays</th><th>Nombre de ventes</th></tr>";
+
+if (count($topPays) > 0) {
+    foreach ($topPays as $row) {
+        echo "<tr>";
+        echo "<td>" . htmlspecialchars($row['nom_pays']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['total_ventes']) . " numéros vendus</td>";
         echo "</tr>";
     }
 } else {

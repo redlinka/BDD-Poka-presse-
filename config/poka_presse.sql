@@ -75,7 +75,6 @@ CREATE TABLE distribution(
    nb_ventes INT,
    date_vente DATE,
    PRIMARY KEY(code, code_pays),
-   UNIQUE(type_canal),
    FOREIGN KEY(code) REFERENCES Numero(code),
    FOREIGN KEY(code_pays) REFERENCES Pays(code_pays)
 );
@@ -112,13 +111,11 @@ CREATE TABLE apparition(
    FOREIGN KEY(num_vers) REFERENCES Maquette(num_vers)
 );
 
------------------------JEU DE DONNEES----------------------
-
 -- Acteur
 INSERT INTO Acteur (nom, prenom, mail, salarie, fonction, pass) VALUES
 ('Martin', 'Claire', 'claire.martin@example.com', FALSE, 'PG', 'pass456'),
 ('Lemoine', 'Sophie', 'sophie.lemoine@example.com', TRUE, 'MQ', 'pass789'),
-('Dupont', 'Jean', 'jean.dupont@example.com', TRUE, 'AD', 'pass123'),
+('Dupont', 'Jean', 'jean.dupont@example.com', TRUE, 'MQ', 'pass123'),
 ('Bernard', 'Luc', 'luc.bernard@example.com', TRUE, 'PG', NULL),
 ('Durand', 'Alice', 'alice.durand@example.com', FALSE, 'PG', NULL),
 ('Petit', 'Julien', 'julien.petit@example.com', TRUE, 'MQ', 'mqpass1'),
@@ -143,39 +140,25 @@ INSERT INTO Acteur (nom, prenom, mail, salarie, fonction, pass) VALUES
 ('Renaud', 'Axel', 'axel.renaud@example.com', TRUE, 'MQ', 'mq1'),
 ('Delcourt', 'Manon', 'manon.delcourt@example.com', TRUE, 'CR', 'crpass001'),
 ('Benoit', 'Marc', 'marc.benoit@example.com', FALSE, 'CR', 'crpass002'),
-('Lange', 'Sarah', 'sarah.lange@example.com', TRUE, 'PG', 'crpass003');
-UPDATE Acteur SET pass = md5(pass);
+('Lange', 'Sarah', 'sarah.lange@example.com', TRUE, 'CR', 'crpass003');
+
 -- Pigiste (mat_pigiste references Acteur.matricule)
 INSERT INTO Pigiste (mat_pigiste, notoriete) VALUES
-(1, 75.50),
-(2, 75.50),
-(4,50),
-(5,50),
-(12,50),
-(18,50),
-(23,50);
+(2, 75.50);
 
 -- Rubrique (hierarchical, num_rubrique_ancetre references same table)
 INSERT INTO Rubrique (nom_rubrique, num_rubrique_ancetre) VALUES
-('Actualités', NULL),     
-('Sports', 1),         
-('Football', 2),
-('Challenges', NULL),
-('Le dossier du mois', NULL), 
-('Enjeu du mois', NULL), 
-('Portrait', NULL), 
-('Interview', NULL), 
-('Relation clients', NULL), 
-('Fidélisation', NULL), 
-('Zapping', NULL), 
-('Efficacité professionnelle', NULL), 
-('Développement personnel', NULL), 
-('Fiches pratiques', NULL);       
+('Actualités', NULL),       -- num_rubrique = 1
+('Sports', 1),             -- num_rubrique = 2
+('Football', 2);           -- num_rubrique = 3
 
 -- Pays
-INSERT INTO Pays (code_pays, nom_pays, statistiques_vente) VALUES
-('FR', 'France', 'Bonne'),
-('US', 'United States', 'Excellente');
+INSERT INTO Pays (code_pays, nom_pays) VALUES
+('FR', 'France'),
+('US', 'United States'),
+('DE', 'Germany'),
+('IT', 'Italy'),
+('ES', 'Spain');
 
 -- Maquette (mat_maquettiste references Acteur.matricule)
 INSERT INTO Maquette (date_creation, lien_maquette, mat_maquettiste) VALUES
@@ -192,7 +175,11 @@ INSERT INTO Numero (code, date_publication, num_vers) VALUES
 -- Distribution (code references Numero.code, code_pays references Pays.code_pays)
 INSERT INTO distribution (code, code_pays, type_canal, nb_ventes, date_vente) VALUES
 ('NUM001', 'FR', 'Kiosque', 5000, '2025-02-05'),
-('NUM001', 'US', 'Abonnement', 3000, '2025-02-05');
+('NUM001', 'US', 'Abonnement', 3000, '2025-02-05'),
+('NUM002', 'DE', 'Kiosque', 2000, '2025-03-10'),
+('NUM002', 'IT', 'Abonnement', 15000, '2025-03-10'),
+('NUM003', 'FR', 'Kiosque', 1000, '2025-03-10'),
+('NUM004', 'ES', 'Abonnement', 500, '2025-03-10');
 
 -- Contient (num_rubrique references Rubrique.num_rubrique, code references Numero.code)
 INSERT INTO contient (num_rubrique, code) VALUES
@@ -202,30 +189,11 @@ INSERT INTO contient (num_rubrique, code) VALUES
 -- Article (num_rubrique references Rubrique.num_rubrique)
 INSERT INTO Article (titre, chapeau, lien_contenu, date_acceptation, publie, nb_feuillets, num_rubrique) VALUES
 ('Nouvelles du football', 'Résumé des matchs récents', 'lien1.html', '2025-01-20', TRUE, 5, 3),
-('Analyse économique', 'Point sur économie actuelle', 'lien2.html', '2025-01-15', FALSE, 3, 1),
-('Evolution du télétravail', 'Bilan depuis 2020', 'teletravail.html', '2025-01-10', TRUE, 4, 12),
-('Portrait de Manon Delcourt', 'Une carriere inspirante', 'manon.html', '2025-01-18', TRUE, 2, 7),
-('Interview exclusive de Sarah Lange', 'Revelations sur le secteur', 'interview_sarah.html', '2025-01-17', FALSE, 3, 8), 
-('Fidelisation : meilleures pratiques', 'Les outils de demain', 'fidelisation_tools.html', '2025-01-12', TRUE, 3, 10), 
-('Le Zapping du mois', 'A ne pas manquer', 'zapping_jan.html', '2025-01-16', TRUE, 1, 11), 
-('Developpement personnel : methodes agiles', 'Appliquer SCRUM a soi-meme', 'devperso_agile.html', '2025-01-14', FALSE, 2, 13), 
-('Challenge : vendre en 24h', 'Experience terrain', 'challenge_24h.html', '2025-01-19', TRUE, 4, 4), 
-('Efficacite professionnelle : outils 2025', 'Gagnez du temps', 'efficacite2025.html', '2025-01-13', TRUE, 3, 12);
+('Analyse économique', 'Point sur économie actuelle', 'lien2.html', '2025-01-15', FALSE, 3, 1);
 
 -- Ecriture (num_article references Article.num_article, mat_pigiste references Pigiste.mat_pigiste)
 INSERT INTO ecriture (num_article, mat_pigiste) VALUES
-(1, 2),
-(2, 4),
-(3, 5),
-(4, 12),
-(5, 18),
-(6, 23),
-(7, 1),
-(8, 2),
-(9, 1),
-(10, 4);
-
-
+(1, 2);
 
 -- Image
 INSERT INTO Image (lien_image) VALUES
