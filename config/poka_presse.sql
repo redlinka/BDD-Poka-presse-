@@ -115,7 +115,7 @@ CREATE TABLE apparition(
 INSERT INTO Acteur (nom, prenom, mail, salarie, fonction, pass) VALUES
 ('Martin', 'Claire', 'claire.martin@example.com', FALSE, 'PG', 'pass456'),
 ('Lemoine', 'Sophie', 'sophie.lemoine@example.com', TRUE, 'MQ', 'pass789'),
-('Dupont', 'Jean', 'jean.dupont@example.com', TRUE, 'MQ', 'pass123'),
+('Dupont', 'Jean', 'jean.dupont@example.com', TRUE, 'AD', 'pass123'),
 ('Bernard', 'Luc', 'luc.bernard@example.com', TRUE, 'PG', NULL),
 ('Durand', 'Alice', 'alice.durand@example.com', FALSE, 'PG', NULL),
 ('Petit', 'Julien', 'julien.petit@example.com', TRUE, 'MQ', 'mqpass1'),
