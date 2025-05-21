@@ -142,6 +142,9 @@ INSERT INTO Acteur (nom, prenom, mail, salarie, fonction, pass) VALUES
 ('Benoit', 'Marc', 'marc.benoit@example.com', FALSE, 'CR', 'crpass002'),
 ('Lange', 'Sarah', 'sarah.lange@example.com', TRUE, 'CR', 'crpass003');
 
+--hash passwords
+UPDATE Acteur SET pass = md5(pass);
+
 -- Pigiste (mat_pigiste references Acteur.matricule)
 INSERT INTO Pigiste (mat_pigiste, notoriete) VALUES
 (2, 75.50);
