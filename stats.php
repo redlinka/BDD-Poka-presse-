@@ -28,7 +28,7 @@ ORDER BY e.article_count DESC
 ";
 $sql2 = "
 SELECT p.nom_pays, SUM(d.nb_ventes) AS total_ventes
-FROM pays p
+FROM region p
 JOIN distribution d ON p.code_pays = d.code_pays
 GROUP BY p.code_pays, p.nom_pays
 ORDER BY total_ventes DESC
