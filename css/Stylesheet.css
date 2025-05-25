@@ -55,7 +55,7 @@ nav a:hover::after {
     width: 100%; /* Animation du soulignement */
 }
 
-/* Responsive - adaptation pour petits écrans */
+/* Responsivité - adaptation pour petits écrans */
 @media (max-width: 768px) {
     header {
         padding: 1rem;
