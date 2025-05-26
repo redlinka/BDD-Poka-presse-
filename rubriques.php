@@ -6,10 +6,13 @@ include 'includes/header.php';
 ?>
 
 <h1>Rubriques</h1>
+<div class="horizontal">
+    <div class="vertical">
+        <iframe class="frame" id="rubriques" src="liste_rubriques.php"></iframe>
+    </div>
 
-<iframe class="frame" id="rubriques" src="liste_rubriques.php"></iframe>
-<div class="container">
     <?php if (isset($_SESSION['fonction']) && in_array($_SESSION['fonction'], ['AD', 'CR'])): ?>
+        <div class="vertical">
         <form action="rubriques.php" method="post">
             <label for="nom_rubrique">Nom de la rubrique :</label>
             <input type="text" id="nom_rubrique" name="nom_rubrique" required><br>
@@ -60,7 +63,9 @@ include 'includes/header.php';
             </select>
             <input type="submit" value="Supprimer">
         </form>
+        </div>
     <?php endif; ?>
+</div>
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['nom_rubrique'])) {

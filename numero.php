@@ -8,8 +8,14 @@ include 'includes/header.php';
 
 <a href="maquettes.php?code=<?php echo isset($_GET['code']) ? htmlspecialchars($_GET['code']) : ''; ?>" class="btn">Maquettes</a>
 <h1>Hierarchie du numéro <?php echo isset($_GET['code']) ? htmlspecialchars($_GET['code']) : ''; ?></h1>
-<iframe class="frame" id="hierarchie" src="liste_hierarchie.php?code=<?php echo isset($_GET['code']) ? htmlspecialchars($_GET['code']) : ''; ?>"></iframe>
-<iframe id="details"></iframe>
+<div class="horizontal">
+    <div class="vertical">
+        <iframe class="frame" id="hierarchie" src="liste_hierarchie.php?code=<?php echo isset($_GET['code']) ? htmlspecialchars($_GET['code']) : ''; ?>"></iframe>
+    </div>
+    <div class="vertical">
+        <iframe id="details"></iframe>
+    </div>
+</div>
 <?php
 $code = isset($_GET['code']) ? htmlspecialchars($_GET['code']) : '';
 $showForms = false;

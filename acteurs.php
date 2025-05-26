@@ -13,8 +13,17 @@ if (!isset($_SESSION['login']) || $_SESSION['fonction'] != 'AD' && $_SESSION['fo
 
 ?>
 <h1>Membres de Poka Presse</h1>
-<iframe class="frame" id="acteurs" src="liste_acteurs.php"></iframe>
-<iframe id="details"></iframe>
+
+<div class="horizontal">
+    <div class="vertical">
+        <iframe class="frame" id="acteurs" src="liste_acteurs.php"></iframe>
+    </div>
+
+    <div class="vertical">
+        <iframe id="details"></iframe>
+    </div>
+</div>
+
 <script>
     document.getElementById('acteurs').addEventListener('load', function() {
         try {

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/BDD-Poka-presse/css/Phpsheet.css">
 <?php
 include 'includes/cnx.php';
 
@@ -15,7 +16,7 @@ try {
     die("Erreur lors de la suppression des articles : " . htmlspecialchars($e->getMessage()));
 }
 
-$stmt = $cnx->query("SELECT * FROM article WHERE publie IS TRUE ORDER BY date_acceptation DESC");
+$stmt = $cnx->query("SELECT * FROM article WHERE publie IS FALSE ORDER BY date_acceptation DESC");
 $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (count($res) == 0) {

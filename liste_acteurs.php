@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/BDD-Poka-presse/css/Phpsheet.css">
 <?php
 include 'includes/cnx.php';
 
