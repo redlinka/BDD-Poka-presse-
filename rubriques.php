@@ -9,18 +9,48 @@ include 'includes/header.php';
 
 <iframe class="frame" id="rubriques" src="liste_rubriques.php"></iframe>
 <div class="container">
-    <form action="rubriques.php" method="post">
-        <label for="nom_rubrique">Nom de la rubrique :</label>
-        <input type="text" id="nom_rubrique" name="nom_rubrique" required><br>
-        <label for="genealogie">Rubrique </label>
-        <select id="genealogie" name="genealogie" required>
-            <option value="orpheline">orpheline</option>
-            <option value="parente">parente</option>
-            <option value="enfant">enfant</option>
-        </select>
-        <div id="deSelectContainer" style="display:none;">
-            de
-            <select id="deSelect" name="deSelect">
+    <?php if (isset($_SESSION['fonction']) && in_array($_SESSION['fonction'], ['AD', 'CR'])): ?>
+        <form action="rubriques.php" method="post">
+            <label for="nom_rubrique">Nom de la rubrique :</label>
+            <input type="text" id="nom_rubrique" name="nom_rubrique" required><br>
+            <label for="genealogie">Rubrique </label>
+            <select id="genealogie" name="genealogie" required>
+                <option value="orpheline">orpheline</option>
+                <option value="parente">parente</option>
+                <option value="enfant">enfant</option>
+            </select>
+            <div id="deSelectContainer" style="display:none;">
+                de
+                <select id="deSelect" name="deSelect">
+                    <?php
+                    $res = $cnx->query("SELECT num_rubrique, nom_rubrique FROM rubrique");
+                    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<option value="' . $row['num_rubrique'] . '">' . $row['nom_rubrique'] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <script>
+                const genealogie = document.getElementById('genealogie');
+                const deSelectContainer = document.getElementById('deSelectContainer');
+                genealogie.addEventListener('change', function() {
+                    if (this.value !== 'orpheline') {
+                        deSelectContainer.style.display = 'block';
+                    } else {
+                        deSelectContainer.style.display = 'none';
+                    }
+                });
+                if (genealogie.value !== 'orpheline') {
+                    deSelectContainer.style.display = 'block';
+                }
+            </script>
+            <input type="submit" value="Ajouter">
+        </form>
+        <br>
+        <form action="rubriques.php" method="post">
+            <label for="rubrique">Supprimer une rubrique :</label>
+            <select id="rubrique" name="rubrique" required>
+                <option value="">-- Sélectionnez une rubrique --</option>
                 <?php
                 $res = $cnx->query("SELECT num_rubrique, nom_rubrique FROM rubrique");
                 while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
@@ -28,37 +58,9 @@ include 'includes/header.php';
                 }
                 ?>
             </select>
-        </div>
-        <script>
-            const genealogie = document.getElementById('genealogie');
-            const deSelectContainer = document.getElementById('deSelectContainer');
-            genealogie.addEventListener('change', function() {
-            if (this.value !== 'orpheline') {
-                deSelectContainer.style.display = 'block';
-            } else {
-                deSelectContainer.style.display = 'none';
-            }
-            });
-            if (genealogie.value !== 'orpheline') {
-            deSelectContainer.style.display = 'block';
-            }
-        </script>
-        <input type="submit" value="Ajouter">
-    </form>
-    <br>
-    <form action="rubriques.php" method="post">
-        <label for="rubrique">Supprimer une rubrique :</label>
-        <select id="rubrique" name="rubrique" required>
-            <option value="">-- Sélectionnez une rubrique --</option>
-            <?php
-            $res = $cnx->query("SELECT num_rubrique, nom_rubrique FROM rubrique");
-            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-                echo '<option value="' . $row['num_rubrique'] . '">' . $row['nom_rubrique'] . '</option>';
-            }
-            ?>
-        </select>
-        <input type="submit" value="Supprimer">
-    </form>
+            <input type="submit" value="Supprimer">
+        </form>
+    <?php endif; ?>
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['nom_rubrique'])) {

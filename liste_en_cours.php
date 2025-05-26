@@ -7,7 +7,7 @@ $numeros = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (count($numeros) > 0) {
     foreach ($numeros as $row) {
         // On passe le code de la ligne dans l'URL
-        $link = "numero.php?code=" . urlencode($row['code']);
+        $link = "maquettes.php?code=" . urlencode($row['code']);
         echo "<a href='" . htmlspecialchars($link) . "'>" . htmlspecialchars($row['code']) . "</a></br>";
     }
 } else {

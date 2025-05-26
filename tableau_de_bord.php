@@ -17,7 +17,20 @@ echo "<h1>Bienvenue, " . htmlspecialchars($user->prenom) . "</h1>";
 
 <h2>Liste des numéros en cours</h2>
 <iframe src="liste_en_cours.php" class="panel" id="frame_en_cours"></iframe>
-
+<form action ="tableau_de_bord.php" method="post">
+    <label for="code">Code du numéro :</label>
+    <input type="text" name="code" id="code" required>
+    <button type="submit" class="btn">créer le numéro</button>
+</form>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['code'])) {
+    $code = htmlspecialchars($_POST['code']);
+    $stmt = $cnx->prepare("INSERT INTO numero (code, date_publication, num_vers) VALUES (:code, NULL, NULL)");
+    $stmt->execute([':code' => $code]);
+    header('Location: numero.php?code=' . urlencode($code));
+    exit();
+}
+?>
 <h2>Liste des numéros publiés</h2>
 <iframe src="liste_publie.php" class="panel" id="frame_publie"></iframe>
 
