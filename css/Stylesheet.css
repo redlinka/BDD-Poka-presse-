@@ -3,3 +3,108 @@
  * This file contains CSS rules used to style the user interface elements.
  * Add your custom styles below to modify the appearance of your web pages.
  */
+/* Style global du body */
+body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+}
+
+/* Style général du header */
+header {
+    background-color: #2c3e50; /* Fond gris foncé (par défaut, on peut modifier) */
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Style de la navigation */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+/* Style des liens */
+nav a {
+    color: #ecf0f1; /* Couleur texte clair */
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Effet de survol des liens */
+nav a:hover {
+    color: #3498db; /* Changement de couleur au survol */
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #3498db; /* Couleur de la ligne de survol */
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100%; /* Animation du soulignement */
+}
+
+/* Style des iframes */
+iframe {
+      border: none;
+}
+.frame {
+      background-color: #f0f0f0;
+      width: 50%;
+      height: 100%;
+}
+#details {
+      background-color: #ffffff;
+      width: 40%;
+      height: 100%;
+}
+
+/* Style du footer */
+footer {
+      background-color: #444;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 14px;
+}
+
+/* Responsivité - adaptation pour petits écrans */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    
+    nav a {
+        font-size: 1rem;
+    }
+    
+    footer {
+        font-size: 1rem;
+      }
+}
