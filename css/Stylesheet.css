@@ -103,6 +103,16 @@ iframe {
     padding: 1em;
 }
 
+footer {
+    width: 100%;
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 8px rgba(30,41,59,0.06);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
 @media (max-width: 900px) {
     .horizontal {
         flex-direction: column;
