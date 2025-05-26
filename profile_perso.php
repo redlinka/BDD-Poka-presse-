@@ -2,6 +2,8 @@
 
 include 'includes/cnx.php';
 
+include 'includes/header.php';
+
 $mat = isset($_GET['matricule']) ? (int)$_GET['matricule'] : null;
 
 if ($mat === null) {

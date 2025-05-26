@@ -10,13 +10,12 @@ if (!isset($_SESSION['login']) || $_SESSION['fonction'] != 'AD' && $_SESSION['fo
     echo '<div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center;">Vous n\'avez pas le droit d\'être ici.</div>';
     exit;
 }
-
 ?>
-<h1>Membres de Poka Presse</h1>
-<iframe class="frame" id="acteurs" src="liste_acteurs.php"></iframe>
+<h1>Articles de Poka Presse</h1>
+<iframe class="frame" id="articles" src="liste_articles.php"></iframe>
 <iframe id="details"></iframe>
 <script>
-    document.getElementById('acteurs').addEventListener('load', function() {
+    document.getElementById('articles').addEventListener('load', function() {
         try {
             const iframeDoc = this.contentDocument || this.contentWindow.document;
             const links = iframeDoc.querySelectorAll('a');
@@ -34,3 +33,4 @@ if (!isset($_SESSION['login']) || $_SESSION['fonction'] != 'AD' && $_SESSION['fo
 </script>
 
 <?php include 'includes/footer.php'; ?>
+<?php

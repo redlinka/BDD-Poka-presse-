@@ -1,23 +1,3 @@
-/**
- * Ce script liste les acteurs d'une base de données selon leur fonction :
- * - Administrateurs (AD)
- * - Comité de rédaction (CR)
- * - Maquettistes (MQ)
- * - Pigistes (PG)
- *
- * Pour chaque fonction, il effectue une requête SQL pour récupérer les acteurs correspondants,
- * puis affiche leur nom et prénom sous forme de liste avec un lien vers leur profil.
- * Si aucune personne n'est trouvée pour une fonction donnée, un message approprié est affiché.
- *
- * Prérequis :
- * - Connexion à la base de données via 'includes/cnx.php'
- * - Table 'acteur' avec au moins les champs : matricule, nom, prenom, fonction
- *
- * Sécurité :
- * - Les valeurs affichées sont échappées avec htmlspecialchars pour éviter les failles XSS.
- * - Les paramètres d'URL sont encodés avec urlencode.
- */
-
 <?php
 include 'includes/cnx.php';
 

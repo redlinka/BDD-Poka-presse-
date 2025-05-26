@@ -1,15 +1,3 @@
-/**
- * Ce script récupère tous les enregistrements de la table 'numero' où 'date_publication' et 'num_vers' sont NULL,
- * indiquant les numéros actuellement en cours. Pour chaque enregistrement correspondant, il génère un lien vers 'numero.php'
- * avec le 'code' concerné en paramètre d'URL. Si aucun enregistrement n'est trouvé, un message indique qu'aucun numéro n'est en cours.
- *
- * Dépendances :
- * - Nécessite une connexion à la base de données via 'includes/cnx.php'.
- *
- * Sortie :
- * - Une liste de liens vers 'numero.php' pour chaque numéro en cours, ou un message si aucun n'est trouvé.
- */
-
 <?php
 include 'includes/cnx.php';
 

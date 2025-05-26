@@ -1,4 +1,3 @@
-
 <?php
 // Include database connection
 include 'includes/cnx.php';

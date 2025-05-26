@@ -1,36 +1,17 @@
-/**
- * Tableau de bord principal pour les utilisateurs connectés.
- *
- * - Vérifie si l'utilisateur est connecté, sinon redirige vers la page de connexion.
- * - Récupère et affiche le prénom de l'utilisateur connecté.
- * - Affiche deux sections principales :
- *   - Liste des numéros en cours (via un iframe vers liste_en_cours.php)
- *   - Liste des numéros publiés (via un iframe vers liste_publie.php)
- * - Ajoute un script JavaScript pour intercepter les clics sur les liens à l'intérieur des iframes
- *   et rediriger la page principale vers l'URL du lien cliqué.
- *
- * Dépendances :
- * - Connexion à la base de données via 'includes/cnx.php'
- * - En-tête et pied de page via 'includes/header.php' et 'includes/footer.php'
- * - Variables de session : 'login' et 'id'
- */
 <?php
 
 include 'includes/cnx.php';
 
 include 'includes/header.php';
 
-// check si l'utilisateur est connecté
 if (!isset($_SESSION['login'])) {
     header('Location: connexion.php');
     exit();
 }
-// recuperer le nom de l'utilisateur
 $stmt = $cnx->prepare("SELECT prenom FROM acteur WHERE matricule = :id");
 $stmt->execute([':id' => $_SESSION['id']]);
 $user = $stmt->fetch(PDO::FETCH_OBJ);
 
-// Afficher l'utilisateur
 echo "<h1>Bienvenue, " . htmlspecialchars($user->prenom) . "</h1>";
 ?>
 
