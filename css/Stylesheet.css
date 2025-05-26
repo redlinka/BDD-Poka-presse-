@@ -51,10 +51,11 @@ nav a::after {
     transition: width 0.3s ease;
 }
 
-nav a:hover::after {
+a:hover::after {
     width: 100%; /* Animation du soulignement */
 }
 
+/* Style du footer */
 footer {
       background-color: #444;
       color: #fff;
